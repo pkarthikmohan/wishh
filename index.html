@@ -73,18 +73,28 @@
         }
 
         /* FIXED CAKE AT BOTTOM */
-        .cake-container {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            z-index: 10;
-        }
+       <!-- Fixed Large Cake at Bottom -->
+<div class="cake-container">
+    <img src="mycake.png" class="cake"> <!-- Your custom cake image -->
+</div>
 
-        .cake {
-            width: 150px;
-        }
+
+    /* FIXED CAKE AT BOTTOM (LARGER SIZE) */
+    .cake-container {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 10;
+    }
+
+    .cake {
+        width: 600px; /* 4 times larger */
+        height: auto; /* Keep aspect ratio */
+    }
+
+
 
         /* CANDLES */
         .candles {
