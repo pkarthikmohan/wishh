@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 Happy Birthday, Shetty! 🎂</title>
     <style>
-        /* Body Styling */
+        /* General Styling */
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
@@ -13,7 +13,7 @@
             color: white;
             margin: 0;
             padding: 0;
-            overflow-y: auto; /* ENABLE SCROLLING */
+            overflow: hidden; /* Prevent unwanted scrolling */
         }
 
         /* Container */
@@ -21,19 +21,19 @@
             padding: 50px 20px;
             position: relative;
             z-index: 2;
-            min-height: 100vh; /* Makes sure content is scrollable */
+            min-height: 100vh;
         }
 
-        /* Animated Gradient Border Effect */
+        /* Animated Gradient for Title */
         @keyframes moving-gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Title with Moving Gradient Edge Effect */
+        /* Title */
         h1 {
-            font-size: 3.5em;
+            font-size: 4em;
             font-weight: bold;
             background: linear-gradient(90deg, #ffdde1, #ee9ca7, #ff758c, #ffdde1);
             background-size: 300% 300%;
@@ -41,6 +41,17 @@
             color: transparent;
             animation: moving-gradient 3s infinite alternate ease-in-out;
             text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeIn 1.5s forwards, moving-gradient 3s infinite alternate;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Poem */
@@ -52,6 +63,8 @@
             border-radius: 15px;
             display: inline-block;
             box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            animation: fadeIn 2s forwards 0.5s;
         }
 
         /* Play Button */
@@ -67,22 +80,68 @@
             border-radius: 30px;
             transition: 0.3s;
             box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: scale(0.8);
+            animation: fadeIn 2s forwards 1s, bounce 1.5s infinite 2s;
         }
 
-        .btn:hover {
-            background: linear-gradient(to right, #ff4757, #ff6b6b);
-            transform: scale(1.1);
+        /* Button Bounce Effect */
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        /* Confetti Canvas */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+        /* Floating Balloons */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background: radial-gradient(circle, #ff4757, #ff6b6b);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background: white;
+            top: 80px;
+            left: 50%;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Fireworks */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: gold;
+            border-radius: 50%;
+            animation: explode 1s infinite;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+
+        /* Birthday Cake */
+        .cake {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: fadeIn 2s forwards 1.5s;
         }
 
     </style>
@@ -90,6 +149,12 @@
 <body>
 
     <canvas id="confetti"></canvas>
+
+    <!-- Floating Balloons -->
+    <div class="balloon" style="top: 20%; left: 10%;"></div>
+    <div class="balloon" style="top: 30%; left: 70%;"></div>
+    <div class="balloon" style="top: 50%; left: 20%;"></div>
+    <div class="balloon" style="top: 60%; left: 80%;"></div>
 
     <div class="container">
         <h1>🎂 Happy Birthday, Yukta! 🎉</h1>
@@ -116,6 +181,9 @@
             <source src="birthdaymp3.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
+
+        <!-- Birthday Cake -->
+        <img src="cake.png" class="cake">
     </div>
 
     <script>
@@ -123,74 +191,27 @@
         function playMusic() {
             var audio = document.getElementById('birthdaySong');
             audio.play().catch(error => {
-                alert("Please click the play button to allow the music 🎶");
+                alert("Click 'Play Birthday Song' to allow the music 🎶");
             });
         }
 
-        // Confetti Animation
-        const canvas = document.getElementById("confetti");
-        const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Fireworks
+        function createFirework(x, y) {
+            let firework = document.createElement("div");
+            firework.classList.add("firework");
+            firework.style.left = x + "px";
+            firework.style.top = y + "px";
+            document.body.appendChild(firework);
 
-        const confettiParticles = [];
-        const colors = ["#ff6b6b", "#ff9a9e", "#f8c291", "#f6e58d", "#ff4757"];
-
-        function ConfettiParticle(x, y, speedX, speedY, size, color) {
-            this.x = x;
-            this.y = y;
-            this.speedX = speedX;
-            this.speedY = speedY;
-            this.size = size;
-            this.color = color;
+            setTimeout(() => firework.remove(), 1000);
         }
 
-        ConfettiParticle.prototype.update = function() {
-            this.y += this.speedY;
-            this.x += this.speedX;
-            if (this.y > canvas.height) {
-                this.y = 0;
-                this.x = Math.random() * canvas.width;
-            }
-        };
+        setInterval(() => {
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * (window.innerHeight / 2);
+            createFirework(x, y);
+        }, 1000);
 
-        ConfettiParticle.prototype.draw = function() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        };
-
-        function createConfetti() {
-            for (let i = 0; i < 150; i++) {  // More confetti particles
-                let x = Math.random() * canvas.width;
-                let y = Math.random() * canvas.height;
-                let speedX = (Math.random() - 0.5) * 2;
-                let speedY = Math.random() * 3 + 1;
-                let size = Math.random() * 4 + 2;
-                let color = colors[Math.floor(Math.random() * colors.length)];
-                confettiParticles.push(new ConfettiParticle(x, y, speedX, speedY, size, color));
-            }
-        }
-
-        function animateConfetti() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            confettiParticles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-            requestAnimationFrame(animateConfetti);
-        }
-
-        createConfetti();
-        animateConfetti();
-
-        // Auto Play Prompt when Page Loads
-        window.onload = function() {
-            setTimeout(() => {
-                alert("Click 'Play Birthday Song' to enjoy the music 🎶");
-            }, 1000);
-        };
     </script>
 
 </body>
