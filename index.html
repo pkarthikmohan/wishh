@@ -24,7 +24,7 @@
             z-index: 2;
         }
 
-        /* Sharp & Glowing Heading */
+        /* Glowing Heading */
         h1 {
             font-size: 4.5em;
             font-weight: bold;
@@ -72,21 +72,21 @@
             50% { transform: scale(1.1); }
         }
 
-        /* FIXED CAKE AT BOTTOM, ALWAYS VISIBLE */
+        /* Fixed Cake Image */
         .cake-container {
             position: fixed;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
-            z-index: 1000; /* Ensures it stays above other elements */
+            z-index: 1000;
             width: 100%;
             background: rgba(0, 0, 0, 0.2);
             padding: 10px 0;
         }
 
         .cake {
-            width: 600px; /* Large size */
+            width: 400px; /* Adjust size as needed */
             height: auto;
             display: block;
             margin: auto;
@@ -96,7 +96,7 @@
 <body>
 
     <div class="container">
-        <h1>🎂 Happy Birthday, Yukta! 🎉</h1>
+        <h1>🎂 Happy Birthday, Shetty! 🎉</h1>
         <p class="poem">
             On this special day so bright and new, <br>
             The world shines warmer—just for you. <br>
@@ -114,18 +114,19 @@
 
         <!-- Play Button for Audio -->
         <button class="btn" onclick="playMusic()">🎶 Play Birthday Song</button>
-        
-        <!-- Audio Element -->
-        <audio id="birthdaySong" autoplay loop>
-    <source src="birthdaymp3.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-</audio>
 
+        <!-- Audio Element -->
+        <audio id="birthdaySong" preload="auto">
+            <source src="birthdaymp3.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
-    <!-- Fixed Large Cake -->
+    <!-- Fixed Cake Image -->
     <div class="cake-container">
-        <img src="cake.png" class="cake"> <!-- Your custom cake image -->
+        <img src="cake.png" class="cake" alt="Birthday Cake"> 
+        <!-- Alternative Online Image (For Testing) -->
+        <!-- <img src="https://www.cake.com/birthday-cake.png" class="cake" alt="Birthday Cake"> -->
     </div>
 
     <script>
