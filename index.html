@@ -42,6 +42,7 @@
         /* Poem */
        /* Animated Border Effect */
 /* Poem Box (No Changes Here) */
+/* Poem Box */
 .poem {
     font-size: 1.5em;
     line-height: 1.8;
@@ -51,41 +52,34 @@
     display: inline-block;
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
     position: relative;
-    overflow: hidden; /* Prevents glow overflow */
+    overflow: hidden; /* Prevents the glow from appearing inside */
 }
 
-/* Glowing Border Animation */
+/* Glowing Border Effect */
 .poem::before {
     content: "";
     position: absolute;
-    top: -5px; /* Moves glow slightly outside */
+    top: -5px; /* Extends glow outside */
     left: -5px;
     right: -5px;
     bottom: -5px;
-    border-radius: 18px; /* Slightly larger than the poem box */
+    border-radius: 18px; /* Slightly larger than the box */
     border: 4px solid transparent;
-    box-shadow: 0px 0px 15px 5px rgba(255, 215, 0, 0.9); /* Yellow glow */
+    background: linear-gradient(90deg, transparent 25%, yellow 50%, transparent 75%);
+    background-size: 400% 100%;
     animation: glowingBorder 4s linear infinite;
 }
 
-/* Keyframes for Moving Glow (1/4th Perimeter at a Time) */
+/* Keyframes for Moving Glow */
 @keyframes glowingBorder {
     0% {
-        clip-path: inset(0 75% 0 0);  /* Top 1/4 */
-    }
-    25% {
-        clip-path: inset(0 0 75% 0);  /* Right 1/4 */
-    }
-    50% {
-        clip-path: inset(75% 0 0 0);  /* Bottom 1/4 */
-    }
-    75% {
-        clip-path: inset(0 0 0 75%);  /* Left 1/4 */
+        background-position: 100% 0;
     }
     100% {
-        clip-path: inset(0 75% 0 0);  /* Back to start */
+        background-position: 0 0;
     }
 }
+
 
         /* Play Button */
         .btn {
