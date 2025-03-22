@@ -154,11 +154,18 @@ body {
         }
 
         .cake {
-            width: 300px; /* Adjust size as needed */
-            height: auto;
-            display: block;
-            margin: auto;
-        }
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    display: block;
+    margin: auto;
+    animation: wiggle 2s infinite ease-in-out; /* Wiggling Animation */
+}
+
+/* Keyframes for Wiggling */
+@keyframes wiggle {
+    0%, 100% { transform: translateX(-5px) rotate(-2deg); }
+    50% { transform: translateX(5px) rotate(2deg); }
+}
     </style>
 </head>
 <body>
