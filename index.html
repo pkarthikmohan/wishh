@@ -9,38 +9,34 @@
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #ff758c, #ff7eb3, #fad0c4);
+            background: linear-gradient(135deg, #ff512f, #dd2476);
             color: white;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            position: relative;
+            overflow-x: hidden;
         }
 
         /* Container */
         .container {
             padding: 50px 20px;
+            min-height: 100vh;
             position: relative;
             z-index: 2;
-            min-height: 100vh;
         }
 
-        /* NEON GLOW HEADING */
+        /* SHARP & VIVID HEADING */
         h1 {
             font-size: 4.5em;
             font-weight: bold;
-            background: linear-gradient(90deg, #ffeb3b, #ff9100, #ff1744, #d500f9);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: neon-glow 3s infinite alternate ease-in-out, fadeIn 1.5s forwards;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            color: #fff;
+            text-shadow: 4px 4px 10px rgba(255, 255, 255, 0.9),
+                         0px 0px 20px rgba(255, 215, 0, 0.8);
+            animation: glowEffect 2s infinite alternate ease-in-out;
         }
 
-        @keyframes neon-glow {
-            0% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ff9100; }
-            50% { text-shadow: 0 0 15px #ff1744, 0 0 25px #d500f9, 0 0 35px #d500f9; }
-            100% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ff9100; }
+        @keyframes glowEffect {
+            0% { text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9); }
+            100% { text-shadow: 0px 0px 20px rgba(255, 215, 0, 1); }
         }
 
         /* Poem */
@@ -52,7 +48,6 @@
             border-radius: 15px;
             display: inline-block;
             box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
-            animation: fadeIn 2s forwards 0.5s;
         }
 
         /* Play Button */
@@ -68,7 +63,7 @@
             border-radius: 30px;
             transition: 0.3s;
             box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
-            animation: fadeIn 2s forwards 1s, bounce 1.5s infinite 2s;
+            animation: bounce 1.5s infinite 2s;
         }
 
         /* Button Bounce Effect */
@@ -77,82 +72,92 @@
             50% { transform: scale(1.1); }
         }
 
-        /* Floating Ribbons */
-        .ribbon {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: url('ribbon.png') no-repeat center/contain;
-            animation: float 4s infinite ease-in-out;
-        }
-
-        .ribbon-left { top: 10%; left: 5%; }
-        .ribbon-right { top: 10%; right: 5%; }
-
-        /* Floating Gift Boxes */
-        .gift {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: url('gift.png') no-repeat center/contain;
-            animation: rotate 5s infinite linear;
-        }
-
-        .gift1 { bottom: 10%; left: 10%; }
-        .gift2 { bottom: 15%; right: 20%; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Fireworks */
-        .firework {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: gold;
-            border-radius: 50%;
-            animation: explode 1s infinite;
-        }
-
-        @keyframes explode {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(5); opacity: 0; }
-        }
-
-        /* Birthday Cake */
-        .cake {
-            width: 120px;
-            height: 120px;
-            position: absolute;
-            bottom: 50px;
+        /* FIXED CAKE AT BOTTOM */
+        .cake-container {
+            position: fixed;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            animation: fadeIn 2s forwards 1.5s;
+            text-align: center;
+            z-index: 10;
         }
 
+        .cake {
+            width: 150px;
+        }
+
+        /* CANDLES */
+        .candles {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .candle {
+            width: 10px;
+            height: 30px;
+            background: white;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        /* FLAME ANIMATION */
+        .flame {
+            width: 12px;
+            height: 20px;
+            background: orange;
+            border-radius: 50%;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 1s infinite alternate ease-in-out;
+        }
+
+        @keyframes flicker {
+            0% { transform: scaleY(1); opacity: 1; }
+            100% { transform: scaleY(1.2); opacity: 0.8; }
+        }
+
+        /* BALLOON POP EFFECT */
+        .balloon {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: radial-gradient(circle, red, darkred);
+            border-radius: 50%;
+            bottom: 0;
+            left: 50%;
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        .pop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: yellow;
+            border-radius: 50%;
+            animation: popEffect 0.5s ease-out forwards;
+        }
+
+        @keyframes popEffect {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
-    <canvas id="confetti"></canvas>
-
-    <!-- Floating Ribbons -->
-    <div class="ribbon ribbon-left"></div>
-    <div class="ribbon ribbon-right"></div>
-
-    <!-- Floating Gift Boxes -->
-    <div class="gift gift1"></div>
-    <div class="gift gift2"></div>
-
     <div class="container">
-        <h1>🎂 Happy Birthday, Yukta! 🎉</h1>
+        <h1>🎂 Happy Birthday, Yuktha! 🎉</h1>
         <p class="poem">
             On this special day so bright and new, <br>
             The world shines warmer—just for you. <br>
@@ -176,13 +181,19 @@
             <source src="birthdaymp3.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
+    </div>
 
-        <!-- Birthday Cake -->
+    <!-- Fixed Cake -->
+    <div class="cake-container">
+        <div class="candles">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+        </div>
         <img src="cake.png" class="cake">
     </div>
 
     <script>
-        // Function to Play the Music
         function playMusic() {
             var audio = document.getElementById('birthdaySong');
             audio.play().catch(error => {
@@ -190,22 +201,25 @@
             });
         }
 
-        // Fireworks
-        function createFirework(x, y) {
-            let firework = document.createElement("div");
-            firework.classList.add("firework");
-            firework.style.left = x + "px";
-            firework.style.top = y + "px";
-            document.body.appendChild(firework);
+        function createBalloon() {
+            let balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+            balloon.style.left = Math.random() * window.innerWidth + "px";
+            document.body.appendChild(balloon);
 
-            setTimeout(() => firework.remove(), 1000);
+            setTimeout(() => {
+                let pop = document.createElement("div");
+                pop.classList.add("pop");
+                pop.style.left = balloon.style.left;
+                pop.style.top = balloon.getBoundingClientRect().top + "px";
+                document.body.appendChild(pop);
+                balloon.remove();
+
+                setTimeout(() => pop.remove(), 500);
+            }, 3000);
         }
 
-        setInterval(() => {
-            let x = Math.random() * window.innerWidth;
-            let y = Math.random() * (window.innerHeight / 2);
-            createFirework(x, y);
-        }, 1000);
+        setInterval(createBalloon, 1000);
     </script>
 
 </body>
