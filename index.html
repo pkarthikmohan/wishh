@@ -24,7 +24,7 @@
             z-index: 2;
         }
 
-        /* SHARP & VIVID HEADING */
+        /* Sharp & Glowing Heading */
         h1 {
             font-size: 4.5em;
             font-weight: bold;
@@ -72,102 +72,31 @@
             50% { transform: scale(1.1); }
         }
 
-        /* FIXED CAKE AT BOTTOM */
-       <!-- Fixed Large Cake at Bottom -->
-<div class="cake-container">
-    <img src="mycake.png" class="cake"> <!-- Your custom cake image -->
-</div>
-
-
-    /* FIXED CAKE AT BOTTOM (LARGER SIZE) */
-    .cake-container {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        z-index: 10;
-    }
-
-    .cake {
-        width: 600px; /* 4 times larger */
-        height: auto; /* Keep aspect ratio */
-    }
-
-
-
-        /* CANDLES */
-        .candles {
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .candle {
-            width: 10px;
-            height: 30px;
-            background: white;
-            border-radius: 3px;
-            position: relative;
-        }
-
-        /* FLAME ANIMATION */
-        .flame {
-            width: 12px;
-            height: 20px;
-            background: orange;
-            border-radius: 50%;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: flicker 1s infinite alternate ease-in-out;
-        }
-
-        @keyframes flicker {
-            0% { transform: scaleY(1); opacity: 1; }
-            100% { transform: scaleY(1.2); opacity: 0.8; }
-        }
-
-        /* BALLOON POP EFFECT */
-        .balloon {
-            position: absolute;
-            width: 30px;
-            height: 40px;
-            background: radial-gradient(circle, red, darkred);
-            border-radius: 50%;
+        /* FIXED CAKE AT BOTTOM, ALWAYS VISIBLE */
+        .cake-container {
+            position: fixed;
             bottom: 0;
             left: 50%;
-            animation: floatUp 4s linear infinite;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 1000; /* Ensures it stays above other elements */
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
-        }
-
-        .pop {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: yellow;
-            border-radius: 50%;
-            animation: popEffect 0.5s ease-out forwards;
-        }
-
-        @keyframes popEffect {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(5); opacity: 0; }
+        .cake {
+            width: 600px; /* Large size */
+            height: auto;
+            display: block;
+            margin: auto;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>🎂 Happy Birthday, Yuktha! 🎉</h1>
+        <h1>🎂 Happy Birthday, Yukta! 🎉</h1>
         <p class="poem">
             On this special day so bright and new, <br>
             The world shines warmer—just for you. <br>
@@ -193,14 +122,9 @@
         </audio>
     </div>
 
-    <!-- Fixed Cake -->
+    <!-- Fixed Large Cake -->
     <div class="cake-container">
-        <div class="candles">
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-        </div>
-        <img src="mycake.png" class="cake">
+        <img src="cake.png" class="cake"> <!-- Your custom cake image -->
     </div>
 
     <script>
@@ -210,26 +134,6 @@
                 alert("Click 'Play Birthday Song' to allow the music 🎶");
             });
         }
-
-        function createBalloon() {
-            let balloon = document.createElement("div");
-            balloon.classList.add("balloon");
-            balloon.style.left = Math.random() * window.innerWidth + "px";
-            document.body.appendChild(balloon);
-
-            setTimeout(() => {
-                let pop = document.createElement("div");
-                pop.classList.add("pop");
-                pop.style.left = balloon.style.left;
-                pop.style.top = balloon.getBoundingClientRect().top + "px";
-                document.body.appendChild(pop);
-                balloon.remove();
-
-                setTimeout(() => pop.remove(), 500);
-            }, 3000);
-        }
-
-        setInterval(createBalloon, 1000);
     </script>
 
 </body>
