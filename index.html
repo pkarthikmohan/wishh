@@ -41,6 +41,7 @@
 
         /* Poem */
        /* Animated Border Effect */
+/* Poem Box (No Changes Here) */
 .poem {
     font-size: 1.5em;
     line-height: 1.8;
@@ -57,31 +58,32 @@
 .poem::before {
     content: "";
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 15px;
+    top: -5px; /* Moves glow slightly outside */
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 18px; /* Slightly larger than the poem box */
     border: 4px solid transparent;
+    box-shadow: 0px 0px 15px 5px rgba(255, 215, 0, 0.9); /* Yellow glow */
     animation: glowingBorder 4s linear infinite;
 }
 
-/* Keyframes for Moving Glow Effect */
+/* Keyframes for Moving Glow (1/4th Perimeter at a Time) */
 @keyframes glowingBorder {
     0% {
-        border-image: linear-gradient(0deg, transparent, #ff4ecb, transparent) 1;
+        clip-path: inset(0 75% 0 0);  /* Top 1/4 */
     }
     25% {
-        border-image: linear-gradient(90deg, transparent, #ff4ecb, transparent) 1;
+        clip-path: inset(0 0 75% 0);  /* Right 1/4 */
     }
     50% {
-        border-image: linear-gradient(180deg, transparent, #ff4ecb, transparent) 1;
+        clip-path: inset(75% 0 0 0);  /* Bottom 1/4 */
     }
     75% {
-        border-image: linear-gradient(270deg, transparent, #ff4ecb, transparent) 1;
+        clip-path: inset(0 0 0 75%);  /* Left 1/4 */
     }
     100% {
-        border-image: linear-gradient(360deg, transparent, #ff4ecb, transparent) 1;
+        clip-path: inset(0 75% 0 0);  /* Back to start */
     }
 }
 
